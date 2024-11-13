@@ -323,3 +323,12 @@ createSlider("slider4", "prevBtn4", "nextBtn4", 4); // Slide 1 card at a time
 // index page slider end
 
 
+// JavaScript to initialize Flatpickr
+flatpickr("#datePicker", {
+  enableTime: false, // Enable time selection
+  dateFormat: "Y-m-d H:i", // Format of the date
+  altInput: true, // Use an alternate input field
+  altFormat: "F j, Y", // Human-friendly format
+  disableMobile: "true"
+});
+
