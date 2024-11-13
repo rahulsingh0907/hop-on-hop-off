@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Card Slider</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    .slider-container {
+      width: 80%;
+      overflow: hidden;
+      margin: 50px auto;
+      position: relative; /* To position the buttons */
+    }
+
+    .slider {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+
+    }
+
+    body{
+        background-color: darkblue;
+    }
+
+    .card {
+      /* min-width: 25%;  */
+      margin-right: 10px;
+      background-color: #f2f2f2;
+      padding: 20px;
+      text-align: center;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    @media (max-width: 768px) {
+      .card {
+        min-width: 50%;  /* Adjust for mobile view (2 cards visible) */
+      }
+    }
+
+    /* Style for the buttons */
+    .prev, .next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      padding: 10px;
+      font-size: 20px;
+      cursor: pointer;
+      z-index: 1;
+    }
+
+    .prev {
+      left: 10px;
+    }
+
+    .next {
+      right: 10px;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="slider-container">
+    <div class="slider" id="slider1">
+      <div class="card">Card 1 hello</div>
+      <div class="card">Card 2 yeello</div>
+      <div class="card">Card 3</div>
+      <div class="card">Card 4</div>
+      <div class="card">Card 5</div>
+      <div class="card">Card 6</div>
+      <div class="card last ">Card 7</div>
+    </div>
+    <!-- Add Previous and Next Buttons -->
+    <button class="prev" id="prevBtn1">&#10094;</button>
+    <button class="next" id="nextBtn1">&#10095;</button>
+  </div>
+
+  <script>
+  function createSlider(sliderId, prevBtnId, nextBtnId, numSlides = 1) {
+    const slider = document.getElementById(sliderId);
+    const cards = slider.querySelectorAll('.card');
+    const totalCards = cards.length; // Total number of cards
+    let perView = getPerView(); // Function to determine perView based on viewport size
+
+    // Set minimum width for each card based on perView
+    function setCardWidths() {
+        const cardWidth = (slider.offsetWidth / perView) - ((perView - 1) * 10 / perView);
+        console.log(slider.offsetWidth, perView)
+        cards.forEach(card => {
+            card.style.minWidth = cardWidth + 'px';
+        });
+    }
+
+    // Function to determine the number of visible cards based on viewport size
+    function getPerView() {
+        if (window.innerWidth >= 1200) {
+            return 4; // Large screens
+        } else if (window.innerWidth >= 768) {
+            return 3; // Medium screens
+        } else {
+            return 1; // Small screens
+        }
+    }
+
+    // Utility function to slide cards
+    function slideCards(direction) {
+        // Check if perView is greater than total cards
+        if (perView >= totalCards) {
+            console.warn("Cannot slide, perView exceeds total number of cards.");
+            return; // Exit if there are not enough cards to slide
+        }
+
+        const translateValue = (100 / perView) * numSlides;
+
+        if (direction === 'prev') {
+            for (let i = 0; i < numSlides; i++) {
+                const lastCard = slider.querySelector('.card:last-child');
+                slider.insertBefore(lastCard, slider.firstChild);
+            }
+            slider.style.transform = `translateX(-${translateValue}%)`;
+        } else if (direction === 'next') {
+            for (let i = 0; i < numSlides; i++) {
+                const firstCard = slider.querySelector('.card:first-child');
+                slider.appendChild(firstCard);
+            }
+            slider.style.transform = `translateX(0)`;
+        }
+
+        // Reset transition and trigger reflow
+        slider.style.transition = 'none';
+        void slider.offsetHeight; // Trigger reflow
+
+        // Enable transition and set final position
+        setTimeout(() => {
+            slider.style.transition = 'transform 0.5s ease-in-out';
+            slider.style.transform = direction === 'prev' ? `translateX(0)` : `translateX(-${translateValue}%)`;
+        }, 20);
+    }
+
+    // Button events for manual slide
+    document.getElementById(prevBtnId).addEventListener('click', () => slideCards('prev'));
+    document.getElementById(nextBtnId).addEventListener('click', () => slideCards('next'));
+
+    // Set initial card widths
+    setCardWidths();
+
+    // Update card widths on window resize
+    window.addEventListener('resize', () => {
+        perView = getPerView(); // Update perView based on new viewport size
+        setCardWidths(); // Recalculate card widths
+    });
+}
+
+// Initialize sliders
+createSlider('slider1', 'prevBtn1', 'nextBtn1', 1); // Slide 1 card at a time
+createSlider('slider2', 'prevBtn2', 'nextBtn2', 2); // Slide 2 cards at a time
+createSlider('slider3', 'prevBtn3', 'nextBtn3', 3); // Slide 3 cards at a time
+
+
+  </script>
+</body>
+</html>

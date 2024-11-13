@@ -1,0 +1,30 @@
+Tour Single Pages Chnages 
+=========================================================================================>
+
+## Content Format? 99% tours similar to what we have designed.
+
+## Add Section
+1. Important information (Para with list) -> In b/w overview and highlights
+
+## Change Section
+2. Hero: Banner with slider (max: 5 images), Reposition booking form
+
+3. Schedule: Can remove this section and put details in All routes section, and ID of schedule is similar to all routes
+
+4. All routes: Add snake pattern in each route with view more button -> Show x routes then on view more show rest routes.
+
+5. Itinerary: Change it to this format
+Departure Points:
+ London Eye, 
+ Belvedere Road, 
+ Tourist bus stop, 
+ London, SE1 7NA (nearest tube and train station is Waterloo, 2 minute walk). 
+First Bus: 10:00am from London Eye, Belvedere Road (SE1 7NA)
+Last Bus: 8:00pm from London Eye, Belvedere Road (SE1 7NA)
+Live Guide: On most departures
+
+6. Main Stops: Should next page link
+
+7. Redemption Info: Banner image will be call in place of right side images
+
+8. Know Before You Go: All services will be static as design, only (Yes or no -- checkbox or text input) will be allowed to admin to make them toggle.
