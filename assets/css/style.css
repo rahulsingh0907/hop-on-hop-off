@@ -2161,6 +2161,9 @@ footer .list-unstyled a:hover {
 }
 
 /* contact us page start */
+.contact-pg{
+  margin-top: 60px;
+}
 .contact-info {
   background-color: #fff;
   padding: 60px 30px 30px 30px;
@@ -2507,6 +2510,10 @@ footer .list-unstyled a:hover {
 
   .route-sec {
       height: 479px;
+  }
+
+  .contact-pg{
+    margin-top: 40px;
   }
 
   .route-sec .route-map .route-stops:nth-child(even) .circle-sep::before,
